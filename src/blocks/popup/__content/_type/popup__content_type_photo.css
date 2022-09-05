@@ -1,0 +1,9 @@
+.popup__content_type_photo {
+  max-width: 75vw;
+  max-height: 75vh;
+  position: relative;
+  background: none;
+  box-shadow: 0;
+  border-radius: 0;
+  padding: 0;
+}
