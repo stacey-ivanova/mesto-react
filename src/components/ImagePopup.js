@@ -1,9 +1,9 @@
 import React from "react";
 
 function ImagePopup(props) {
-  let { onClose, card, isopen } = props;
+  let { onClose, card, isOpen } = props;
   return (
-    <div className={`popup popup_type_photo ${isopen ? "popup_opened" : ""}`}>
+    <div className={`popup popup_type_photo ${isOpen ? "popup_opened" : ""}`}>
       <div className="popup__content popup__content_type_photo">
         <button
           type="button"

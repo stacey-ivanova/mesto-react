@@ -19,7 +19,7 @@ function App() {
     link: "",
   });
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [cardIsOpen, setCardIsOpen] = React.useState(false);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -41,12 +41,12 @@ function App() {
       name: "",
       link: "",
     });
-    setIsOpen(false);
+    setCardIsOpen(false);
   }
 
   function handleCardClick(card) {
     setSelectedCard({ ...card });
-    setIsOpen(true);
+    setCardIsOpen(true);
   }
 
   return (
@@ -67,19 +67,17 @@ function App() {
         name="avatar"
         title="Обновить аватар"
       >
-        <>
-          <label className="popup__form-field">
-            <input
-              type="url"
-              name="avatar"
-              id="avatar-input"
-              placeholder="Введите ссылку"
-              className="popup__input popup__input_type_avatar"
-              required
-            />
-            <span className="popup__input-error avatar-input-error"></span>
-          </label>
-        </>
+        <label className="popup__form-field">
+          <input
+            type="url"
+            name="avatar"
+            id="avatar-input"
+            placeholder="Введите ссылку"
+            className="popup__input popup__input_type_avatar"
+            required
+          />
+          <span className="popup__input-error avatar-input-error"></span>
+        </label>
       </PopupWithForm>
 
       <PopupWithForm
@@ -149,7 +147,7 @@ function App() {
       <ImagePopup
         onClose={closeAllPopups}
         card={selectedCard}
-        isopen={isOpen}
+        isOpen={cardIsOpen}
       />
     </div>
   );
