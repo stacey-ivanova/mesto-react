@@ -8,20 +8,29 @@ import React from "react";
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
+
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
+
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
+  const [selectedCard, setSelectedCard] = React.useState({
+    name: "",
+    link: "",
+  });
+
+  const [isOpen, setIsOpen] = React.useState(false);
+
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setIsAddPlacePopupOpen(true);
   }
 
   function closeAllPopups() {
@@ -29,20 +38,15 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard({
-      isOpen: false,
       name: "",
       link: "",
     });
+    setIsOpen(false);
   }
 
-  const [selectedCard, setSelectedCard] = React.useState({
-    isOpen: false,
-    name: "",
-    link: "",
-  });
-
   function handleCardClick(card) {
-    setSelectedCard({ isOpen: true, name: card.name, link: card.link });
+    setSelectedCard({ ...card });
+    setIsOpen(true);
   }
 
   return (
@@ -84,34 +88,32 @@ function App() {
         name="profile"
         title="Редактировать профиль"
       >
-        <>
-          <label className="popup__form-field">
-            <input
-              type="text"
-              name="name"
-              id="name-input"
-              placeholder="Введите имя"
-              className="popup__input popup__input_type_name"
-              minLength="2"
-              maxLength="40"
-              required
-            />
-            <span className="popup__input-error name-input-error"></span>
-          </label>
-          <label className="popup__form-field">
-            <input
-              type="text"
-              name="about"
-              id="job-input"
-              placeholder="Введите профессию"
-              className="popup__input popup__input_type_job"
-              minLength="2"
-              maxLength="200"
-              required
-            />
-            <span className="popup__input-error job-input-error"></span>
-          </label>
-        </>
+        <label className="popup__form-field">
+          <input
+            type="text"
+            name="name"
+            id="name-input"
+            placeholder="Введите имя"
+            className="popup__input popup__input_type_name"
+            minLength="2"
+            maxLength="40"
+            required
+          />
+          <span className="popup__input-error name-input-error"></span>
+        </label>
+        <label className="popup__form-field">
+          <input
+            type="text"
+            name="about"
+            id="job-input"
+            placeholder="Введите профессию"
+            className="popup__input popup__input_type_job"
+            minLength="2"
+            maxLength="200"
+            required
+          />
+          <span className="popup__input-error job-input-error"></span>
+        </label>
       </PopupWithForm>
       <PopupWithForm
         isOpen={isAddPlacePopupOpen}
@@ -119,34 +121,36 @@ function App() {
         name="card"
         title="Новое место"
       >
-        <>
-          <label className="popup__form-field">
-            <input
-              type="text"
-              id="title-input"
-              name="name"
-              placeholder="Название"
-              className="popup__input popup__input_type_title"
-              minLength="1"
-              maxLength="30"
-              required
-            />
-            <span className="popup__input-error title-input-error"></span>
-          </label>
-          <label className="popup__form-field">
-            <input
-              name="link"
-              id="link-input"
-              placeholder="Ссылка на картинку"
-              className="popup__input popup__input_type_link"
-              type="url"
-              required
-            />
-            <span className="popup__input-error link-input-error"></span>
-          </label>
-        </>
+        <label className="popup__form-field">
+          <input
+            type="text"
+            id="title-input"
+            name="name"
+            placeholder="Название"
+            className="popup__input popup__input_type_title"
+            minLength="1"
+            maxLength="30"
+            required
+          />
+          <span className="popup__input-error title-input-error"></span>
+        </label>
+        <label className="popup__form-field">
+          <input
+            name="link"
+            id="link-input"
+            placeholder="Ссылка на картинку"
+            className="popup__input popup__input_type_link"
+            type="url"
+            required
+          />
+          <span className="popup__input-error link-input-error"></span>
+        </label>
       </PopupWithForm>
-      <ImagePopup onClose={closeAllPopups} card={selectedCard} />
+      <ImagePopup
+        onClose={closeAllPopups}
+        card={selectedCard}
+        isopen={isOpen}
+      />
     </div>
   );
 }

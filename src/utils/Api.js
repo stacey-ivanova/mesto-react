@@ -1,10 +1,3 @@
-const handleResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject("Ошибка");
-};
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -13,13 +6,13 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then(handleResponse);
+    }).then(this.handleResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then(handleResponse);
+    }).then(this.handleResponse);
   }
 
   changeUserInfo(user) {
@@ -30,7 +23,7 @@ class Api {
         name: user.name,
         about: user.about,
       }),
-    }).then(handleResponse);
+    }).then(this.handleResponse);
   }
 
   changeAvatar(link) {
@@ -40,7 +33,7 @@ class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then(handleResponse);
+    }).then(this.handleResponse);
   }
 
   newCard(value) {
@@ -48,28 +41,35 @@ class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(value),
-    }).then(handleResponse);
+    }).then(this.handleResponse);
   }
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(handleResponse);
+    }).then(this.handleResponse);
   }
 
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: this._headers,
-    }).then(handleResponse);
+    }).then(this.handleResponse);
   }
 
   disLikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(handleResponse);
+    }).then(this.handleResponse);
   }
+
+  handleResponse = (res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject("Ошибка");
+  };
 }
 
 const api = new Api({
