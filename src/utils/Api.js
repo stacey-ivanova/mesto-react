@@ -27,11 +27,12 @@ class Api {
   }
 
   changeAvatar(link) {
+    console.log(link.avatar);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: link,
+        avatar: link.avatar,
       }),
     }).then(this.handleResponse);
   }
@@ -50,20 +51,19 @@ class Api {
     }).then(this.handleResponse);
   }
 
-  likeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then(this.handleResponse);
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        method: "DELETE",
+        headers: this._headers,
+      }).then(this.handleResponse);
+    } else {
+      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        method: "PUT",
+        headers: this._headers,
+      }).then(this.handleResponse);
+    }
   }
-
-  disLikeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then(this.handleResponse);
-  }
-
   handleResponse = (res) => {
     if (res.ok) {
       return res.json();
