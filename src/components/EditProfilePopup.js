@@ -3,9 +3,9 @@ import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
-  const [name, setName] = React.useState();
+  const [name, setName] = React.useState("");
 
-  const [description, setDescription] = React.useState();
+  const [description, setDescription] = React.useState("");
 
   const user = React.useContext(CurrentUserContext);
 
@@ -39,7 +39,7 @@ function EditProfilePopup(props) {
         <input
           type="text"
           name="name"
-          value={props.name}
+          value={name || ""}
           onChange={handleNameChange}
           id="name-input"
           placeholder="Введите имя"
@@ -54,7 +54,7 @@ function EditProfilePopup(props) {
         <input
           type="text"
           name="about"
-          value={props.description}
+          value={description || ""}
           onChange={handleDescriptionChange}
           id="job-input"
           placeholder="Введите профессию"

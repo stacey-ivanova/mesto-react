@@ -4,7 +4,7 @@ import api from "../utils/Api";
 import Card from "./Card";
 
 function Main(props) {
-  let {
+  const {
     onEditAvatar,
     onEditProfile,
     onAddPlace,
@@ -52,14 +52,13 @@ function Main(props) {
       <section className="articles">
         <ul className="elements">
           {props.cards.map((card) => (
-            <li className="element" key={card._id}>
-              <Card
-                cardElement={card}
-                onCardClick={onCardClick}
-                onCardLike={onCardLike}
-                onCardDelete={onCardDelete}
-              />
-            </li>
+            <Card
+              key={card._id}
+              cardElement={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />
           ))}
         </ul>
       </section>

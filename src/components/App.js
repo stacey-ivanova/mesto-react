@@ -79,29 +79,49 @@ function App() {
   }
 
   function handleUpdateAvatar(user) {
-    api.changeAvatar(user).then((data) => {
-      setCurrentUser(data);
-      closeAllPopups();
-    });
+    api
+      .changeAvatar(user)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleAddPlaceSubmit(card) {
-    api.newCard(card).then((newCard) => {
-      setCards([...cards, newCard]);
-      closeAllPopups();
-    });
+    api
+      .newCard(card)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   React.useEffect(() => {
-    api.getInitialCards().then((cards) => {
-      setCards([...cards]);
-    });
+    api
+      .getInitialCards()
+      .then((cards) => {
+        setCards([...cards]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   React.useEffect(() => {
-    api.getUserInfo().then((data) => {
-      setCurrentUser(data);
-    });
+    api
+      .getUserInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
