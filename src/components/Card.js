@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import trashButton from "../images/group.svg";
 
 function Card(props) {
-  const { onCardClick, cardElement, onCardLike, onCardDelete, key1 } = props;
+  const { onCardClick, cardElement, onCardLike, onCardDelete } = props;
 
   const user = React.useContext(CurrentUserContext);
 
@@ -32,7 +32,7 @@ function Card(props) {
   }
 
   return (
-    <li className="element" key={key1}>
+    <li className="element">
       <button
         type="button"
         className={cardDeleteButtonClassName}

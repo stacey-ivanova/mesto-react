@@ -31,16 +31,26 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    });
+    api
+      .changeLikeCardStatus(card._id, isLiked)
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then((deleteCard) => {
-      const newCards = cards.filter((c) => c._id !== card._id);
-      setCards(newCards);
-    });
+    api
+      .deleteCard(card._id)
+      .then((deleteCard) => {
+        const newCards = cards.filter((c) => c._id !== card._id);
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleEditAvatarClick() {
@@ -72,10 +82,15 @@ function App() {
   }
 
   function handleUpdateUser(user) {
-    api.changeUserInfo(user).then((data) => {
-      setCurrentUser(data);
-      closeAllPopups();
-    });
+    api
+      .changeUserInfo(user)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleUpdateAvatar(user) {

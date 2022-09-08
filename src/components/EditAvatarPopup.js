@@ -4,6 +4,10 @@ import PopupWithForm from "./PopupWithForm";
 function EditAvatarPopup(props) {
   const avatar = React.useRef();
 
+  React.useEffect(() => {
+    avatar.current.value = " ";
+  }, [props.isOpen]);
+
   function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateAvatar({ avatar: avatar.current.value });
