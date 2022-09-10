@@ -1,0 +1,16 @@
+.form__item {
+  width: 100%;
+  display: block;
+  border: 0;
+  border-bottom: 2px solid #cccccc;
+  margin: auto;
+  margin-bottom: 30px;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #cccccc;
+  box-sizing: border-box;
+  background-color: black;
+}

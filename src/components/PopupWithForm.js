@@ -2,6 +2,7 @@ import React from "react";
 
 function PopupWithForm(props) {
   const { title, name, onClose, onSubmit } = props;
+
   return (
     <div
       className={`popup popup_type_${name} ${

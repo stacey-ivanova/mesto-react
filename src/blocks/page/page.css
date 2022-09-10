@@ -2,8 +2,12 @@
   padding: 45px 0px 60px;
   max-width: 880px;
   min-width: 320px;
+
   margin: 0 auto;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 1024px) {
